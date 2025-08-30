@@ -11,6 +11,7 @@ public class PlayerJump : MonoBehaviour
 
     private PlayerInputAction playerInputAction;
     private PlayerClimb playerClimb;
+    private PlayerZipline playerZipline;
     private new Rigidbody2D rigidbody2D;
     private int currentJumpCount;                   //현재 점프 횟수
     private float originalGravityScale;             //원래 중력 배율
@@ -26,6 +27,7 @@ public class PlayerJump : MonoBehaviour
 
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerClimb = GetComponent<PlayerClimb>();
+        playerZipline = GetComponent<PlayerZipline>();
 
         currentJumpCount = maxJumpCount;
         originalGravityScale = rigidbody2D.gravityScale;
@@ -33,7 +35,10 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        SetFreefallGravity();
+        if (CanSetFreefallGravity())
+        { 
+            SetFreefallGravity(); 
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -88,7 +93,12 @@ public class PlayerJump : MonoBehaviour
 
     private void SetFreefallGravity()
     {
-        if (playerClimb.isClimbing) return;
         rigidbody2D.gravityScale = (rigidbody2D.linearVelocityY < 0) ? freefallGravityScale : originalGravityScale;
+    }
+
+    private bool CanSetFreefallGravity()
+    {
+        return !playerClimb.isClimbing &&
+        !playerZipline.isZiplining;
     }
 }
