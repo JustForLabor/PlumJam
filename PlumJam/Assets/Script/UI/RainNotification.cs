@@ -59,12 +59,14 @@ public class RainNotification : MonoBehaviour
             timer.text = $"{min}:{sec}";
 
             //1초 대기
+            //Debug.Log($"{secs}");
             yield return new WaitForSeconds(1f);
             secs--;
 
             //시간이 0이 되면 타이머 종료
             if (secs <= 0)
             {
+                //Debug.Log("타이머 종료");
                 break;
             }
         }

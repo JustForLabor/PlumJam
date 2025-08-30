@@ -44,6 +44,11 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        playerInputAction.Player.Disable();
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         CheckGrounded(collision.contacts);

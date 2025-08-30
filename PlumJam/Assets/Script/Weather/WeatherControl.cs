@@ -39,16 +39,21 @@ public class WeatherManager : MonoBehaviour
         StartCoroutine(RainSequence());
     }
 
+    private void OnDestroy()
+    {
+        OnWeatherChanged = null;
+    }
+
     public IEnumerator RainSequence()
-    {   
+    {
         yield return new WaitForSeconds(initialWaitTime);
 
         while (true)
         {
             lightRain();
-            yield return new WaitForSeconds(heavyRainDuration);
-            HeavyRain();
             yield return new WaitForSeconds(heavyRainInterval);
+            HeavyRain();
+            yield return new WaitForSeconds(heavyRainDuration);
         }
     }
 

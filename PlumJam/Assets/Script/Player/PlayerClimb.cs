@@ -27,6 +27,12 @@ public class PlayerClimb : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        playerInputAction.Player.Disable();
+        OnClimbEnter = null;
+    }
+
     public void EnterClimbMode()
     {
         if (isClimbing) return;
