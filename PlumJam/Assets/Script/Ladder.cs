@@ -38,13 +38,7 @@ public class Ladder : MonoBehaviour, IInteractable
             yield break;
         }
 
-        yield return new WaitForSeconds(0.3f);  //사다리 타기 시작 후 약간의 딜레이를 줌
-        
-        //사다리 끝에 도달하거나 시작점 아래로 내려가면 사다리 타기 종료
-        yield return new WaitUntil(() =>
-        playerTransform.position.y >= endPoint.position.y ||
-        playerTransform.position.y <= startPoint.position.y);
-
+        yield return new WaitUntil(() => playerTransform.position.y >= endPoint.position.y);
         playerClimb.ExitClimbMode();
         Debug.Log("Climb Ended");
     }
