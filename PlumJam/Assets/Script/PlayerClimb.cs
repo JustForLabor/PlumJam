@@ -34,6 +34,8 @@ public class PlayerClimb : MonoBehaviour
         isClimbing = true;
         rigidbody2D.linearVelocity = Vector2.zero;
         rigidbody2D.gravityScale = 0f;
+
+        OnClimbEnter?.Invoke(this, EventArgs.Empty);
     }
 
     public void ExitClimbMode()
