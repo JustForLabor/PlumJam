@@ -4,27 +4,43 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance { get; private set; }
+
     [Header("Movement Settings")]
     [SerializeField] private float maxSpeed;        //최대 속도
     [SerializeField] private float acceleration;    //가속도
     [SerializeField] private float deceleration;    //감속도
 
-    
+
 
     private PlayerInputAction playerInputAction;
+    private PlayerClimb playerClimb;
     private new Rigidbody2D rigidbody2D;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         playerInputAction = new PlayerInputAction();
         playerInputAction.Player.Enable();
 
+        playerClimb = GetComponent<PlayerClimb>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
-    {
-        Move();
+    {   if (CanMove())
+        { 
+            Move();
+        }
     }
 
     private void Move()
@@ -38,5 +54,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 force = deltaVelocity * acceleration;
 
         rigidbody2D.AddForce(force, ForceMode2D.Force);
+    }
+
+    private bool CanMove()
+    { 
+        return !playerClimb.isClimbing;
     }
 }
