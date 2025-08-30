@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,14 +11,15 @@ public enum WeatherType
 public class WeatherManager : MonoBehaviour
 {
     public static WeatherManager instance { get; private set; }
+    public event EventHandler OnWeatherChanged;
+
 
     [Header("Rain Settings")]
     [SerializeField] private ParticleSystem lightRainParticle;
     [SerializeField] private ParticleSystem heavyRainParticle;
-    [SerializeField] private float heavyRainDuration;            //폭우 시간
-    [SerializeField] private float heavyRainInterval;            //폭우 간격
-
-    public WeatherType weatherType = WeatherType.LightRain; //현재 날씨
+    public int heavyRainDuration;                             //폭우 시간
+    public int heavyRainInterval;                             //폭우 간격
+    public WeatherType weatherType = WeatherType.LightRain;     //현재 날씨
 
     private void Awake()
     {
@@ -29,7 +31,10 @@ public class WeatherManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    private void Start()
+    {
         StartCoroutine(RainSequence());
     }
 
@@ -50,6 +55,7 @@ public class WeatherManager : MonoBehaviour
         heavyRainParticle.Stop();
 
         weatherType = WeatherType.LightRain;
+        OnWeatherChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void HeavyRain()
@@ -58,5 +64,6 @@ public class WeatherManager : MonoBehaviour
         heavyRainParticle.Play();
 
         weatherType = WeatherType.HeavyRain;
+        OnWeatherChanged?.Invoke(this, EventArgs.Empty);
     }
 }
