@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,8 @@ public class PlayerJump : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
     private int currentJumpCount;                   //현재 점프 횟수
     private float originalGravityScale;             //원래 중력 배율
+
+    private Transform hitGroundTransform;           //바닥에 닿은 물체의 Transform
 
     private void Awake()
     {
@@ -41,9 +44,17 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         CheckGrounded(collision.contacts);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform == hitGroundTransform)
+        {
+            hitGroundTransform = null;
+        }
     }
 
     //점프 시도
@@ -73,7 +84,14 @@ public class PlayerJump : MonoBehaviour
 
         foreach (ContactPoint2D contact in contacts)
         {
-            if (contact.normal.y > slopeThreshold)
+            if (contact.normal.y > slopeThreshold && contact.collider.transform != hitGroundTransform)
+            {
+                //바닥에 닿고 그 바닥이 이전에 닿았던 바닥과 같으면 중복 방지
+                ResetJumpCount();
+                hitGroundTransform = contact.collider.transform;
+                break;
+            }
+            else if (contact.normal.y < -slopeThreshold)
             {
                 ResetJumpCount();
 
