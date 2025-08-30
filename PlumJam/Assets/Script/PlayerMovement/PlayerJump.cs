@@ -55,6 +55,7 @@ public class PlayerJump : MonoBehaviour
             playerClimb.ExitClimbMode();
         }
 
+        rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocityX, 0); //점프 직전 수직 속도 초기화
         rigidbody2D.AddForce(Vector2.up * GetJumpForce(), ForceMode2D.Impulse);
         currentJumpCount--;
     }
