@@ -17,6 +17,11 @@ public class PlayerInteraction : MonoBehaviour
         playerInputAction.Interaction.Interact.performed += (InputAction.CallbackContext c) => TryInteract();
     }
 
+    private void OnDisable()
+    {
+        playerInputAction.Interaction.Disable();
+    }
+
     //상호작용 시도
     private void TryInteract()
     {

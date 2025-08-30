@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        playerInputAction.Player.Disable();
+    }
+
     private void Move()
     {
         float input = playerInputAction.Player.Movement.ReadValue<float>();

@@ -17,6 +17,7 @@ public class WeatherManager : MonoBehaviour
     [Header("Rain Settings")]
     [SerializeField] private ParticleSystem lightRainParticle;
     [SerializeField] private ParticleSystem heavyRainParticle;
+    [SerializeField] private float initialWaitTime; 
     public int heavyRainDuration;                             //폭우 시간
     public int heavyRainInterval;                             //폭우 간격
     public WeatherType weatherType = WeatherType.LightRain;     //현재 날씨
@@ -38,14 +39,21 @@ public class WeatherManager : MonoBehaviour
         StartCoroutine(RainSequence());
     }
 
+    private void OnDestroy()
+    {
+        OnWeatherChanged = null;
+    }
+
     public IEnumerator RainSequence()
     {
+        yield return new WaitForSeconds(initialWaitTime);
+
         while (true)
         {
             lightRain();
-            yield return new WaitForSeconds(heavyRainDuration);
-            HeavyRain();
             yield return new WaitForSeconds(heavyRainInterval);
+            HeavyRain();
+            yield return new WaitForSeconds(heavyRainDuration);
         }
     }
 
