@@ -2710,7 +2710,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &196833198
 MonoBehaviour:
@@ -45356,7 +45356,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &396135378
 MonoBehaviour:
@@ -46334,8 +46334,8 @@ MonoBehaviour:
   lightRainParticle: {fileID: 1213562234}
   heavyRainParticle: {fileID: 280280032}
   initialWaitTime: 0
-  heavyRainDuration: 20
-  heavyRainInterval: 40
+  heavyRainDuration: 40
+  heavyRainInterval: 30
   weatherType: 0
 --- !u!4 &699087656
 Transform:
