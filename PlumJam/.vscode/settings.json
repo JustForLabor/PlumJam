@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "PlumJam.sln"
+    "dotnet.defaultSolution": "PlumJam.sln",
+    "CodeGPT.apiKey": "OpenAI"
 }
