@@ -44,7 +44,7 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         playerInputAction.Player.Disable();
     }

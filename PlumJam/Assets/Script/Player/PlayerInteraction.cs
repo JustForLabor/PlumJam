@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
         playerInputAction.Interaction.Interact.performed += (InputAction.CallbackContext c) => TryInteract();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         playerInputAction.Interaction.Disable();
     }

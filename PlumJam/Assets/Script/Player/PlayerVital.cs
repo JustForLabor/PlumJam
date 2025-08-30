@@ -5,7 +5,7 @@ public class PlayerVital : MonoBehaviour
 {
     public static event EventHandler OnPlayerDie;
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         OnPlayerDie = null;
     }

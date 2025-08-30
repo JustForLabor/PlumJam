@@ -27,7 +27,7 @@ public class PlayerClimb : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         playerInputAction.Player.Disable();
         OnClimbEnter = null;
