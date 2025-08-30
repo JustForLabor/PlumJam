@@ -14,16 +14,12 @@ public class PlayerInteraction : MonoBehaviour
         playerInputAction = new PlayerInputAction();
         playerInputAction.Interaction.Enable();
 
-        playerInputAction.Interaction.Interact.performed += Interact_Performed;
+        playerInputAction.Interaction.Interact.performed += (InputAction.CallbackContext c) => TryInteract();
     }
 
-    private void Interact_Performed(InputAction.CallbackContext context)
-    {
-        TryInteract();
-    }
-
+    //상호작용 시도
     private void TryInteract()
-    { 
+    {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, interactionRadius);
 
         foreach (Collider2D hitCollider in hitColliders)

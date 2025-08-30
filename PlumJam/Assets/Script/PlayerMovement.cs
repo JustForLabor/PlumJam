@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInputAction playerInputAction;
     private PlayerClimb playerClimb;
+    private PlayerZipline playerZipline;
     private new Rigidbody2D rigidbody2D;
 
     private void Awake()
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         playerInputAction.Player.Enable();
 
         playerClimb = GetComponent<PlayerClimb>();
+        playerZipline = GetComponent<PlayerZipline>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -57,7 +59,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool CanMove()
-    { 
-        return !playerClimb.isClimbing;
+    {
+        return !playerClimb.isClimbing &&
+        !playerZipline.isZiplining;
     }
 }
