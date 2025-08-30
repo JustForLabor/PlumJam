@@ -44753,8 +44753,8 @@ MonoBehaviour:
   lightRainParticle: {fileID: 1213562234}
   heavyRainParticle: {fileID: 280280032}
   initialWaitTime: 0
-  heavyRainDuration: 20
-  heavyRainInterval: 40
+  heavyRainDuration: 10
+  heavyRainInterval: 10
   weatherType: 0
 --- !u!4 &699087656
 Transform:
@@ -45455,6 +45455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f968cdbe8e353a04387912ed58c446f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
 --- !u!1001 &1102153994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55061,6 +55062,13 @@ MonoBehaviour:
   sounds:
   - soundType: 0
     audioClip: {fileID: 8300000, guid: d361c1fc9e49acf4cbbd2fdcfff73a78, type: 3}
+    skipTime: 0
+  - soundType: 1
+    audioClip: {fileID: 8300000, guid: 5ca4de8a151b08e45afa34fe2428d36f, type: 3}
+    skipTime: 2
+  - soundType: 2
+    audioClip: {fileID: 8300000, guid: c78689d6722e46845a5a2bb5af808528, type: 3}
+    skipTime: 0
 --- !u!4 &1194104053
 Transform:
   m_ObjectHideFlags: 0

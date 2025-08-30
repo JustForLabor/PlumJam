@@ -3,8 +3,9 @@ using UnityEngine;
 
 public enum SoundType
 {
-    LightRainBgm,
-
+    LightRain,
+    HeavyRain,
+    Jump,
 }
 
 public class SoundManager : MonoBehaviour
@@ -26,31 +27,33 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.Stop();
 
-        AudioClip audioClip = GetSound(soundType);
-        audioSource.clip = audioClip;
+        Sound sound = GetSound(soundType);
+        audioSource.clip = sound.audioClip;
         audioSource.loop = true;
+        audioSource.time = sound.skipTime;
         audioSource.Play();
     }
 
     public void PlaySoundOneShot(SoundType soundType)
-    { 
-        AudioClip audioClip = GetSound(soundType);
-        audioSource.clip = audioClip;
-        audioSource.PlayOneShot(audioClip);
+    {
+        //AudioSource audioSourceFor = new AudioSource();
+
+        Sound sound = GetSound(soundType);
+        audioSource.PlayOneShot(sound.audioClip);
     }
 
     //SoundType에 맞는 clip을 가져옴
-    public AudioClip GetSound(SoundType soundType)
+    public Sound GetSound(SoundType soundType)
     {
         foreach (Sound s in sounds)
         {
             if (s.soundType == soundType)
             {
-                return s.audioClip;
+                return s;
             }
         }
         //기본 값
-        return sounds[0].audioClip;
+        return sounds[0];
     }
 }
 
@@ -59,4 +62,5 @@ public class Sound
 {
     public SoundType soundType;
     public AudioClip audioClip;
+    public float skipTime;
 }

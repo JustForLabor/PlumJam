@@ -65,7 +65,7 @@ public class WeatherManager : MonoBehaviour
         weatherType = WeatherType.LightRain;
         OnWeatherChanged?.Invoke(this, EventArgs.Empty);
 
-        SoundManager.instance.PlaySound(SoundType.LightRainBgm);
+        SoundManager.instance.PlaySound(SoundType.LightRain);
     }
 
     private void HeavyRain()
@@ -75,5 +75,7 @@ public class WeatherManager : MonoBehaviour
 
         weatherType = WeatherType.HeavyRain;
         OnWeatherChanged?.Invoke(this, EventArgs.Empty);
+
+        SoundManager.instance.PlaySound(SoundType.HeavyRain);
     }
 }

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputAction playerInputAction;
     private PlayerClimb playerClimb;
     private PlayerZipline playerZipline;
+    private PlayerVital playerVital;
     private new Rigidbody2D rigidbody2D;
 
     private void Awake()
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerClimb = GetComponent<PlayerClimb>();
         playerZipline = GetComponent<PlayerZipline>();
+        playerVital = GetComponent<PlayerVital>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -66,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     private bool CanMove()
     {
         return !playerClimb.isClimbing &&
-        !playerZipline.isZiplining;
+        !playerZipline.isZiplining &&
+        !playerVital.isDead;
     }
 }

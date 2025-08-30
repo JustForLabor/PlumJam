@@ -13,6 +13,7 @@ public class PlayerJump : MonoBehaviour
     private PlayerInputAction playerInputAction;
     private PlayerClimb playerClimb;
     private PlayerZipline playerZipline;
+    private PlayerVital playerVital;
     private new Rigidbody2D rigidbody2D;
     private int currentJumpCount;                   //현재 점프 횟수
     private float originalGravityScale;             //원래 중력 배율
@@ -31,6 +32,7 @@ public class PlayerJump : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerClimb = GetComponent<PlayerClimb>();
         playerZipline = GetComponent<PlayerZipline>();
+        playerVital = GetComponent<PlayerVital>();
 
         currentJumpCount = maxJumpCount;
         originalGravityScale = rigidbody2D.gravityScale;
@@ -39,8 +41,8 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         if (CanSetFreefallGravity())
-        { 
-            SetFreefallGravity(); 
+        {
+            SetFreefallGravity();
         }
     }
 
@@ -76,6 +78,8 @@ public class PlayerJump : MonoBehaviour
         rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocityX, 0); //점프 직전 수직 속도 초기화
         rigidbody2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         currentJumpCount--;
+
+        SoundManager.instance.PlaySoundOneShot(SoundType.Jump);
 
         Debug.Log($"JumpForce : {force}");
     }
@@ -128,5 +132,11 @@ public class PlayerJump : MonoBehaviour
     {
         return !playerClimb.isClimbing &&
         !playerZipline.isZiplining;
+    }
+
+    private bool CanJump()
+    {
+        return currentJumpCount > 0 &&
+        !playerVital.isDead;
     }
 }

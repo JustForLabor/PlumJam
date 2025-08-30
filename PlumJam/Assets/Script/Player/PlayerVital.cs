@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerVital : MonoBehaviour
 {
     public static event EventHandler OnPlayerDie;
+    public bool isDead = false;
 
     private void OnDestroy()
     {
@@ -22,6 +23,7 @@ public class PlayerVital : MonoBehaviour
     {
         //플레이어 사망
         Debug.Log("Player died!");
+        isDead = true;
         OnPlayerDie?.Invoke(this, EventArgs.Empty);
     }
 }
