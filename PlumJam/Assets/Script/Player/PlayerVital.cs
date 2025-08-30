@@ -25,5 +25,7 @@ public class PlayerVital : MonoBehaviour
         Debug.Log("Player died!");
         isDead = true;
         OnPlayerDie?.Invoke(this, EventArgs.Empty);
+        Time.timeScale = 0f;
+        SoundManager.instance.StopSound();
     }
 }

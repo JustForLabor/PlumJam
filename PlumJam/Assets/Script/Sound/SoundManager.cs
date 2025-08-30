@@ -6,6 +6,7 @@ public enum SoundType
     LightRain,
     HeavyRain,
     Jump,
+    Goal,
 }
 
 public class SoundManager : MonoBehaviour
@@ -32,6 +33,11 @@ public class SoundManager : MonoBehaviour
         audioSource.loop = true;
         audioSource.time = sound.skipTime;
         audioSource.Play();
+    }
+
+    public void StopSound()
+    { 
+        audioSource.Stop();
     }
 
     public void PlaySoundOneShot(SoundType soundType)

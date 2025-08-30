@@ -17,7 +17,10 @@ public class ZiplineLineRenderer : MonoBehaviour
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, point1.position);
         lineRenderer.SetPosition(1, point2.position);
+    }
 
-        //lineRenderer.enabled = true;
+    private void OnDestroy()
+    {
+        lineRenderer = null;
     }
 }
