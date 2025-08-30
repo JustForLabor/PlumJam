@@ -66,9 +66,13 @@ public class PlayerJump : MonoBehaviour
             playerClimb.ExitClimbMode();
         }
 
+        float force = GetJumpForce();
+
         rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocityX, 0); //점프 직전 수직 속도 초기화
-        rigidbody2D.AddForce(Vector2.up * GetJumpForce(), ForceMode2D.Impulse);
+        rigidbody2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         currentJumpCount--;
+
+        Debug.Log($"JumpForce : {force}");
     }
 
     //점프 횟수 초기화
@@ -103,7 +107,7 @@ public class PlayerJump : MonoBehaviour
 
     private float GetJumpForce()
     {
-        float gravity = Mathf.Abs(Physics2D.gravity.y * rigidbody2D.gravityScale);
+        float gravity = Mathf.Abs(Physics2D.gravity.y * originalGravityScale);
         float jumpVelocity = Mathf.Sqrt(2 * gravity * jumpHeight);
         float force = rigidbody2D.mass * jumpVelocity;
 
